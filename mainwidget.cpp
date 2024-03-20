@@ -4,7 +4,7 @@ MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent), mainScreenWidget{this}
 {
     QVector<QString> samplesPerSecListViewItems = {"8", "16", "32"};
-    QVector<QString> baudRateListViewItems = {"8", "16", "32"};
+    QSerialPortInfo portInfo;
     // TODO: move these resolution constants
     this->resize(400, 600);
     mainScreen.setupUi(&mainScreenWidget);
@@ -24,12 +24,12 @@ MainWidget::MainWidget(QWidget *parent)
     }
 
     // BaudRate List view
-    for(auto item = baudRateListViewItems.begin(); item != baudRateListViewItems.end(); item++) {
-        baudRateListView->addItem(*item);
+    QList<qint32> standardBaudRates = portInfo.standardBaudRates();
+    for(auto item = standardBaudRates.begin(); item != standardBaudRates.end(); item++) {
+        baudRateListView->addItem(QString::asprintf("%d", *item));
     }
 
     // Port List view
-    QSerialPortInfo portInfo;
     QList<QSerialPortInfo> availablePorts = portInfo.availablePorts();
     for(auto item = availablePorts.begin(); item != availablePorts.end(); item++) {
         portListView->addItem(item->portName());
