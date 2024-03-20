@@ -7,4 +7,4 @@ options such as
 - Baud Rate
 - Communication Port
 
-[MainScreen](./git-resources/main-screen.png)
+![MainScreen](./git-resources/main-screen.png)
