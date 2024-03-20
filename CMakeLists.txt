@@ -38,6 +38,7 @@ else()
         add_executable(Temperature-Reader-Qt
             ${PROJECT_SOURCES}
             MainWidget.ui
+            README.md
         )
     endif()
 endif()
