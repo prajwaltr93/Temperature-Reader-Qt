@@ -7,6 +7,7 @@
 #include <QSerialPort>
 #include <QTimer>
 #include <QIODevice>
+#include <QPainter>
 
 #include "ui_MainWidget.h"
 
@@ -23,6 +24,9 @@ class MainWidget : public QWidget
     QTimer *refreshRate;
     QSerialPort *serialPort;
     QLabel *temperatureLabel;
+    QWidget *painterCanvasWidget;
+    QRect painterRect;
+    QPen painterPen;
 
     bool running = false;
     char *buffer = nullptr;
@@ -31,8 +35,9 @@ public:
     ~MainWidget();
 
 private slots:
-    void readUARTData(void);
     void startReading(bool);
+    void paintEvent(QPaintEvent* /*event*/) override;
     void refreshPortList(bool);
+    void baudRateChanged(int index);
 };
 #endif // MAINWIDGET_H
