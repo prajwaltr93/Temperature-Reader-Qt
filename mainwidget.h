@@ -33,5 +33,6 @@ public:
 private slots:
     void readUARTData(void);
     void startReading(bool);
+    void refreshPortList(bool);
 };
 #endif // MAINWIDGET_H

@@ -52,6 +52,8 @@ MainWidget::MainWidget(QWidget *parent)
 
     // allocate buffer to read data
     buffer = (char *)malloc(2 * sizeof(char));
+
+    connect(mainScreen.portRefreshButton, &QPushButton::clicked, this, &MainWidget::refreshPortList);
 }
 
 MainWidget::~MainWidget() {
@@ -87,5 +89,19 @@ void MainWidget::startReading(bool clicked)
         serialPort->close();
         temperatureLabel->setText("N/A");
     }
+}
+
+void MainWidget::refreshPortList(bool clicked) {
+    // Port List view update
+    QSerialPortInfo portInfo;
+    QList<QSerialPortInfo> availablePorts = portInfo.availablePorts();
+
+    // clear all items
+    portListView->clear();
+
+    for(auto item = availablePorts.begin(); item != availablePorts.end(); item++) {
+        portListView->addItem(item->portName());
+    }
+
 }
 

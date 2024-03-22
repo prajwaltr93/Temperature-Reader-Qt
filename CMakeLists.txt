@@ -39,6 +39,7 @@ else()
             ${PROJECT_SOURCES}
             MainWidget.ui
             README.md
+            main-resources.qrc
         )
     endif()
 endif()
